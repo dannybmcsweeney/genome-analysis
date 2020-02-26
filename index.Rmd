@@ -6,4 +6,3 @@ output: html_document
 ---
 
 [Lab2b](Lab2b_McSweeney.html)
-
