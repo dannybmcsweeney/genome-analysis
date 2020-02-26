@@ -1,0 +1,8 @@
+---
+title: "index"
+author: "Danny McSweeney"
+date: "2/26/2020"
+output: html_document
+---
+
+[Lab2b](Lab2b_McSweeney.html)
