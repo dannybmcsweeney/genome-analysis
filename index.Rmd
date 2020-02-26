@@ -5,5 +5,5 @@ date: "2/26/2020"
 output: html_document
 ---
 
-[Lab6](Lab2b_McSweeney.html)
+[Lab2](Lab2b_McSweeney.html)
 
