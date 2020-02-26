@@ -1,0 +1,108 @@
+---
+title: "Lab3_McSweeney"
+author: "Danny McSweeney"
+date: "2/10/2020"
+output: html_document
+---
+
+
+```{r}
+read.table("23andME_complete.txt", header = TRUE, sep = "\t")
+```
+
+```{r}
+SNPs <- read.table("23andME_complete.txt", header = TRUE, sep = "\t")
+```
+
+```{r}
+str(SNPs)
+```
+
+```{r}
+class(SNPs)
+```
+
+```{r}
+typeof(SNPs)
+```
+
+```{r}
+str(SNPs)
+```
+
+
+```{r}
+summary(SNPs)
+```
+
+```{r}
+class(SNPs$genotype)
+```
+
+
+```{r}
+typeof(SNPs$genotype)
+```
+
+
+```{r}
+str(SNPs$genotype)
+```
+
+
+```{r}
+summary(SNPs$genotype)
+```
+
+```{r}
+summary(SNPs$chromosome)
+```
+
+
+```{r}
+summary(SNPs$position)
+```
+
+
+```{r}
+summary(SNPs$chromosome)
+```
+
+
+```{r}
+SNPs$chromosome = ordered(SNPs$chromosome, levels=c(seq(1, 22), "X", "Y", "MT"))
+summary(SNPs$chromosome)
+```
+
+```{r}
+#Exercise No 1
+ggplot(SNPs$chromosome)
+```
+
+
+```{r}
+#Exercise No. 2
+SNPs$chromosome = ordered(SNPs$chromosome, levels=c(seq(1, 22), "X", "Y", "MT"))
+summary(SNPs$chromosome)
+```
+
+
+```{r}
+plot(ordered(SNPs$chromosome, levels=c(seq(1, 22), "X", "Y", "MT")))
+```
+
+
+```{r}
+#Exercise No 3
+ggplot(I_subset, aes(Name, fill = genotype))+ 
+  geom_bar(color = "black")
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
