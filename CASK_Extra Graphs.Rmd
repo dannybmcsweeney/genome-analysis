@@ -1,0 +1,132 @@
+---
+title: "RNA Seq - Extra Graphs"
+author: "Danny McSweeney"
+date: "5/4/2020"
+output: html_document
+---
+
+```{r}
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("RColorBrewer")
+install.packages("plotly")
+install.packages("DT")
+install.packages("dplyr")
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(RColorBrewer)
+library(plotly)
+library(DT)
+library(dplyr)
+```
+
+
+```{r}
+  if (!requireNamespace('BiocManager', quietly = TRUE))
+    install.packages('BiocManager')
+
+  BiocManager::install('EnhancedVolcano')
+```
+
+
+```{r}
+  library(EnhancedVolcano)
+```
+
+```{r}
+CASK <- read.table("CASK_WT1-KO1_alldetected.txt", sep = "\t", header = T)
+```
+
+```{r}
+Pvalue <- CASK$pvalue
+hist(Pvalue,
+    main = "P Values Across Transcriptome Under CASK Gene Knockout Conditions",
+    col="navy",
+    border="white"
+    )
+```
+
+```{r}
+ppi <- 400
+png("Pvalue.png", width=13*ppi, height=8*ppi, res=ppi)
+
+Pvalue <- CASK$pvalue
+hist(Pvalue,
+    main = "P Values Across Transcriptome Under CASK Gene Knockout Conditions",
+    col="navy",
+    border="white"
+    )
+```
+
+```{r}
+Pvalue <- CASK$pvalue
+hist(Pvalue,
+  main="P Values of Signficant Differential Gene Expression",
+  xlim=c(0, 0.2),
+  col="navy",
+  border="White"
+  )    
+```
+
+
+```{r}
+Pvalue <- CASK$pvalue
+hist(Pvalue,
+  main="P Values of Signficant Differential Gene Expression",
+  xlim=c(0, 0.05),
+  col="navy",
+  border="white",
+  breaks=150,
+  labels = TRUE
+  )    
+```
+
+```{r}
+ppi <- 400
+png("Pvalue_selected.png", width=13*ppi, height=8*ppi, res=ppi)
+
+Pvalue <- CASK$pvalue
+hist(Pvalue,
+  main="P Values of Significant Differential Gene Expression",
+  xlim=c(0, 0.05),
+  col="navy",
+  border="white",
+  breaks=150,
+  labels = TRUE
+  )    
+```
+
+```{r}
+CASKfc <- read.table("CASKfc.txt", sep = "\t", header = T)
+```
+
+
+```{r}
+FC <- CASKfc$log2FoldChange
+hist(FC,
+  main="Fold Changes of All Differentially Expressed Genes",
+  xlim=c(-11, 11),
+  col="#b34a00",
+  border="black"
+  )    
+```
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+

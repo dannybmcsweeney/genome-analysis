@@ -1,0 +1,38 @@
+---
+title: "Danny"
+author: "Katherine Chacon-Vargas"
+date: "4/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+devtools::install_github('kevinblighe/EnhancedVolcano')
+
+```
+
+```{r}
+library(EnhancedVolcano)
+```
+```{r }
+dataD <- read.table("RNA-Seq_b6_WTvsKO_alldetected.txt", sep = "\t", header = T)
+```
+
+```{r}
+plot(dataD$log2FoldChange, dataD$log10padj)
+```
+
+
+```{r}
+EnhancedVolcano(dataD,
+                lab = rownames(dataD),
+                x = 'log2FoldChange',
+                y = 'pvalue',
+                xlim = c(-5,8))
+```
+
+
+
