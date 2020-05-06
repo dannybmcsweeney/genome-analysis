@@ -116,17 +116,62 @@ hist(FC,
 ```
 
 ```{r}
+ppi <- 400
+png("FC_selected.png", width=13*ppi, height=8*ppi, res=ppi)
 
+FC <- CASKfc$log2FoldChange
+hist(FC,
+  main="Fold Changes of Differentially Expressed Genes With FC>2",
+  xlab = "Log2(Fold Change)",
+  xlim=c(-11, 11),
+  col="#b34a00",
+  border="black"
+  )    
 ```
 
 
+
+```{r}
+InitialMapping1 <- read.table("CASK_InitialMapping_1.txt", sep = "\t", header = T)
+```
+
+```{r}
+str(InitialMapping1)
+```
+
+```{r}
+##incomplete attempt
+specie <- rep(c("A_WT" , 5) , c("A_KO" , 3) , c("banana" , 3) , c("triticum" , 3) )
+condition <- rep(c("Reads_After_Filtering" , "rRNA" , "miRNA" , "tRNA" , "snRNA") , 4)
+
+
+specie <- c(rep("sorgho" , 3) , rep("poacee" , 3) , rep("banana" , 3) , rep("triticum" , 3) )
+condition <- rep(c("normal" , "stress" , "Nitrogen") , 4)
+value <- abs(rnorm(12 , 0 , 15))
+data <- data.frame(specie,condition,value)
+
+ggplot(InitialMapping1, aes(fill=condition, y=count(), x=specie)) + ) + 
+  geom_bar(color="black") + 
+  ggtitle("Initial Mapping Analysis of RNA-Seq Read Types") + 
+  ylab("Read Count") + 
+  xlab("Technical Replicate-Cell Line")
+dev.off()
+```
+
+```{r}
+
+InitialMapping1 <- read.table("CASK_InitialMapping_1.txt", sep = "\t", header = T)
+
+IM1 <- ggplot() + geom_bar(aes(y = percentage, x = year, fill = product), data = charts.data,
+                           stat="identity")
+
+```
+  
 ```{r}
 
 ```
 
 
-
 ```{r}
-
+InitialMapping2 <- read.table("CASK_InitialMapping_2.txt", sep = "\t", header = T)
 ```
-
