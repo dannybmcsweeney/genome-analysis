@@ -1,0 +1,203 @@
+---
+title: "CASK RNA-Seq"
+author: "Danny McSweeney"
+date: "4/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("RColorBrewer")
+install.packages("plotly")
+install.packages("DT")
+install.packages("dplyr")
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(RColorBrewer)
+library(plotly)
+library(DT)
+library(dplyr)
+```
+
+
+```{r}
+  if (!requireNamespace('BiocManager', quietly = TRUE))
+    install.packages('BiocManager')
+
+  BiocManager::install('EnhancedVolcano')
+```
+
+
+```{r}
+  library(EnhancedVolcano)
+```
+
+```{r}
+CASK <- read.table("CASK_WT1-KO1_alldetected.txt", sep = "\t", header = T)
+```
+
+```{r}
+str(CASK)
+```
+
+```{r}
+summary(CASK)
+```
+
+```{r}
+plot(CASK$log2FoldChange, CASK$pvalue)
+```
+
+```{r}
+  EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125))
+```
+
+
+```{r}
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "Fold Changes vs P Values for Differentially Expressed Genes Due to Lack of CASK",
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    col=c('black', '#474747', '#474747', '#b30000'),
+      colAlpha = 1
+  )
+```
+
+```{r}
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "Fold Changes vs P Values for Differentially Expressed Genes Due to Lack of CASK",
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    col=c('black', '#474747', '#474747', '#b30000'),
+      colAlpha = 1,
+    shape = 18
+  )
+```
+
+
+```{r}
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "Fold Changes vs P Values for Differentially Expressed Genes Due to Lack of CASK",
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    col=c('black', '#474747', '#474747', '#ffd700'),
+      colAlpha = 1
+  )
+```
+
+
+```{r}
+##p-adjusted value to see if it was different from the regular p-value
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "Fold Changes vs P Values for Differentially Expressed Genes Due to Lack of CASK",
+    x = 'log2FoldChange',
+    y = 'padj',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    col=c('black', '#474747', '#474747', '#b30000'),
+      colAlpha = 1,
+      pointSize = 4
+  )
+```
+
+
+```{r}
+
+```
+
+```{r}
+## Volcano Plot
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "Fold Changes vs P Values for Differentially Expressed Genes Due to Lack of CASK",
+    subtitle = ("(Experiment Condition: CASK gene knockout)"),
+    subtitleLabSize = 12,
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    pCutoff = 0.05,
+    FCcutoff = 2,
+    labSize = 4,
+    col=c('#0e2433', '#1c4966', '#1c4966', '#b44b00'),
+      colAlpha = 1,
+      shape = 18,
+      pointSize = 4,
+    border = "full"
+  )
+```
+
+
+```{r}
+ppi <- 400
+png("CASK_Volcano_Plot.png", width=10*ppi, height=6*ppi, res=ppi)
+
+EnhancedVolcano(CASK,
+    lab = rownames(CASK),
+    title = "RNA-Seq Analysis of Differentially Expressed Genes",
+    subtitle = ("(Experiment Condition: CASK gene knockout)"),
+    subtitleLabSize = 12,
+    x = 'log2FoldChange',
+    y = 'pvalue',
+    xlim = c(-11, 11),
+    ylim = c(0, 125),
+    pCutoff = 0.05,
+    FCcutoff = 2,
+    labSize = 4,
+    col=c('#0e2433', '#1c4966', '#1c4966', '#b44b00'),
+      colAlpha = 1,
+      shape = 18,
+      pointSize = 4,
+    border = "full"
+  )
+```
+
+```{r}
+
+```
+
