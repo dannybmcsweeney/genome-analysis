@@ -292,68 +292,65 @@ report_03_11_2020 %>%
 ```
 
 
+
+
+
 ```{r}
-## Graph #1: I combined data to create a graph that highlights the changes in number of confirmed cases over time for the top five states in the US.
+##Graph No. 1: Graph of number of confirmed cases for states found in Canada.
+report_03_11_2020 %>% 
+  filter (Country.Region == "Canada") %>% 
+  ggplot(aes(x = Confirmed,  y = reorder(Province.State, Confirmed))) + 
+    geom_point() +
+    ggtitle("Confirmed cases for each Canada province") +
+    ylab("Country/Region") +
+    xlab("Confirmed Cases")
+```
 
-### download the file
-time_series_recovered <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")) %>%
-  rename(Province_State = "Province/State", Country_Region = "Country/Region")
+```{r}
+##Graph No. 2: Graph of number of confirmed deaths for states found in Canada.
+report_03_11_2020 %>% 
+  filter (Country.Region == "Canada") %>% 
+  ggplot(aes(x = Deaths,  y = reorder(Province.State, Deaths))) + 
+    geom_point() +
+    ggtitle("Confirmed deaths for each Canada province") +
+    ylab("Country/Region") +
+    xlab("Confirmed Deaths")
+```
 
-### convert to long format
-time_series_recovered_long <- time_series_recovered %>% 
-  pivot_longer(-c(Province_State, Country_Region, Lat, Long),
-               names_to = "Date", values_to = "Recovered")
+```{r}
+##Graph No. 2: Graph of number of confirmed casess for states found in China
+report_03_11_2020 %>% 
+  filter (Country.Region == "China") %>% 
+  ggplot(aes(x = Confirmed,  y = reorder(Province.State, Confirmed))) + 
+    geom_point() +
+    ggtitle("Confirmed cases for each Chinese State") +
+    ylab("Country/Region") +
+    xlab("Confirmed Cases")
+```
 
-### Create the Key
-time_series_recovered_long <- time_series_recovered_long %>% 
-  unite(Key, Province_State, Country_Region, Date, sep = ".") %>% 
-  select(Key, Recovered)
-
-### Merge with prior table (only this time will delete the Key column
-### because we have no further use for it)
-time_series_long_joined <- full_join(time_series_long_joined,
-             time_series_recovered_long, by = c("Key")) %>% 
-   select(-Key)
-head(time_series_long_joined)
+```{r}
+##Graph No. 3: Graph of number of confirmed deaths for states found in China.
+report_03_11_2020 %>% 
+  filter (Country.Region == "China") %>% 
+  ggplot(aes(x = Deaths,  y = reorder(Province.State, Deaths))) + 
+    geom_point() +
+    ggtitle("Confirmed deaths for each Chinese province") +
+    ylab("Country/Region") +
+    xlab("Confirmed Deaths")
 ```
 
 
 ```{r}
-### download the file
-time_series_recovered <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv"))
-```
-
-
-```{r}
-head(time_series_recovered)
-```
-
-```{r}
-str(time_series_recovered)
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
-```
-
-```{r}
-
+##Graph No. 4: Comparison of number of deaths vs number of recovered positive cases of COVID-19 for US
+time_series_long_joined_counts %>% 
+  group_by(Country_Region, Report_Type, Date) %>% 
+  summarise(Counts = sum(Counts)) %>% 
+  filter (Country_Region == "US") %>% 
+  filter (Report_Type %in% c("Deaths", "Recovered")) %>% 
+    ggplot(aes(x = Date,  y = log2(Counts), fill = Report_Type, color = Report_Type)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("US COVID-19 Deaths versus Recovered")
 ```
 
 ```{r}
