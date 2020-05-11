@@ -6,7 +6,7 @@ library(shiny)
 library(tidyverse)
 library(lubridate)
 
-##.Rmd link - 
+##.Rmd link - https://github.com/dannybmcsweeney/genome-analysis/blob/master/McSweeney_Shiny1.R
 
 ## Uploading the time series data
 

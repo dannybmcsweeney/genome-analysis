@@ -12,6 +12,8 @@ library(mapdata)
 library(viridis)
 library(RColorBrewer)
 
+##Github link - https://github.com/dannybmcsweeney/genome-analysis/blob/master/McSweeney_ShinyOtherCountries.R
+
 ## Uploading the time series data
 
 time_series_confirmed_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
